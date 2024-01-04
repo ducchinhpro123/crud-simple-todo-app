@@ -1,0 +1,24 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Add task to make you look more stupid</title>
+{% endblock %}
+
+
+{% block content %}
+  <form action="{% url 'todo_app:add-task' %}" method="post">
+    {% csrf_token %}
+    <div class="w-8/12 flex items-center justify-between">
+      <label for="{{ form.title.id_for_label }}">Title: </label>
+      {{ form.title }}
+    </div>
+    <br>
+    <div class="w-8/12 flex items-center justify-between">
+      <label for="{{ form.description.id_for_label }}">Description: </label>
+      {{ form.description }}
+    </div>
+    <br>
+    <input type="submit" value="Add you task" class="bg-cyan-900 text-white rounded p-1 shadow cursor-pointer">
+  </form>
+{% endblock %}

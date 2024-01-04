@@ -1,0 +1,108 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}
+  <title>Home page To Do App 😘</title>
+{% endblock %}
+
+{% block content %}
+  <div class="w-10/12 mx-auto">
+    <div>
+      <p class="text-red-600 font-bold">Note:</p>
+      <div class="flex items-center mb-1">
+        <img src="{% static "todo_app/icons/checked.svg" %}" class="w-10" alt="checked">
+        <span class="text-muted italic">mark as completed</span>
+      </div>
+      <div class="flex items-center">
+        <img src="{% static "todo_app/icons/hourglass.svg" %}" class="w-10" alt="hourglass">
+        <span class="text-muted italic">mark as uncompleted</span>
+      </div>
+      <div class="flex items-center">
+        <img src="{% static "todo_app/icons/trash.svg" %}" class="w-10" alt="hourglass">
+        <span class="text-muted italic">mark as delete this task</span>
+      </div>
+    </div>
+    <br/>
+    <a class="bg-cyan-900 text-white px-2 rounded mb-1" href="{% url 'todo_app:add-task' %}">Add your task in here</a>
+
+    <div
+            class="relative flex flex-col w-full h-full overflow-x-scroll text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">
+      <table class="w-full text-left table-auto min-w-max">
+        <thead>
+        <tr class="bg-cyan-500 ">
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-bold font-sans text-sm antialiased leading-none text-black opacity-70">
+              Title
+            </p>
+          </th>
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-bold font-sans text-sm antialiased leading-none text-black opacity-70">
+              Description
+            </p>
+          </th>
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-bold font-sans text-sm antialiased leading-none text-black opacity-70">
+              Created date
+            </p>
+          </th>
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-bold font-sans text-sm antialiased leading-none text-black opacity-70">
+              Completed
+            </p>
+          </th>
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-bold font-sans text-sm antialiased leading-none text-black opacity-70">
+              Delete task
+            </p>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for todo in todos %}
+          <tr class="even:bg-blue-gray-50/50">
+            <td class="p-4">
+              <p class="{% if todo.completed %}line-through{% endif %} block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                {{ todo.title }}
+              </p>
+            </td>
+            <td class="p-4">
+              <p class="{% if todo.completed %}line-through{% endif %} block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                {{ todo.description }}
+              </p>
+            </td>
+            <td class="p-4">
+              <p class="{% if todo.completed %}line-through{% endif %} block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                {{ todo.created_date }}
+              </p>
+            </td>
+            <td class="p-4">
+              <a href="{% url 'todo_app:completed-task' task_id=todo.id %}">
+                {% if todo.completed %}
+                  <img src="{% static "todo_app/icons/checked.svg" %}" class="w-10" alt="checked">
+                {% else %}
+                  <img src="{% static "todo_app/icons/hourglass.svg" %}" class="w-10" alt="hourglass">
+                {% endif %}
+              </a>
+            </td>
+            <td class="p-4">
+              <a href="{% url 'todo_app:delete-task' task_id=todo.id %}">
+                {% if todo.completed %}
+                  <img src="{% static "todo_app/icons/trash.svg" %}" class="w-10" alt="checked">
+                {% endif %}
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+
+        </tbody>
+      </table>
+      {% if messages %}
+      <ul>
+        {% for message in messages %}
+          <li class="text-red-600 text-muted">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    </div>
+  </div>
+{% endblock %}

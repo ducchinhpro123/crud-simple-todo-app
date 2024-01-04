@@ -1,0 +1,29 @@
+{% load static tailwind_tags %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  {% tailwind_css %}
+  {% block title %}
+    {# add title in here. eg: <title></title>#}
+  {% endblock %}
+</head>
+<body>
+<div class="container p-3">
+  <header class="bg-amber-300 px-2 shadow-md">
+    <h1 class="text-3xl font-bold text-cyan-900">
+      This is my basic To Do application
+    </h1>
+  </header>
+  <br/>
+  {% block content %}
+    {#  add content in here. eg: your div	#}
+  {% endblock %}
+</div>
+
+
+</body>
+</html>
