@@ -7,6 +7,12 @@
 3. pip install django
 4. pip install 'django-tailwind[reload]'
 ## 🚀 Getting Started: Running the App Locally
-1. terminal one run: py manage.py tailwind start
-2. terminal one run: py manage.py runserver
+1. terminal one run:
+```bash
+  py manage.py tailwind start
+```
+2. terminal two run:
+```bash
+  py manage.py tailwind start
+```
 usually http://127.0.0.1:8000/
